@@ -10,7 +10,15 @@ usernames = {}
 
 async def addUser(websocket):
     USERS.add(websocket)
-    usernames[websocket] = randomword(8)
+
+    usernames[websocket] = generateRandomNickname()
+
+def generateRandomNickname():
+    random_username = randomword(4) + str(random.randint(1000, 9999))
+    while (random_username in usernames.values()):
+        random_username = randomword(4) + str(random.randint(1000, 9999))
+    
+    return random_username
 
 
 async def removeUser(websocket):
